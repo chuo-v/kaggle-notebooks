@@ -12,6 +12,10 @@ The Jupyter notebooks, which can be identified by the `.ipynb` extension at the 
 
 ### Competitions
 
+Competitions are listed in reverse chronological order (based on start date).
+
+- ["Binary Classification with a Bank Dataset"](competitions/playground-series-s5e8/) competition
+    - Still working on this ongoing competition..
 - ["Predict the Introverts from the Extroverts"](competitions/playground-series-s5e7/) competition
     - This was my first competition! I was only able to join it later and so I only had 3 days (out of the 1 month period the competition was held) to work on it, but although I did not get into the top 10 of the private [leaderboard](https://www.kaggle.com/competitions/playground-series-s5e7/leaderboard) (nor was I close to it), it was exciting to examine the data and build models to submit predictions.
     - I was wary from the start about overfitting to the public leaderboard, but it seems I still have much to learn (my private leaderboard ranking was 364 lower than the one for the public leaderboard).
