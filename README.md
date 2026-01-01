@@ -14,8 +14,23 @@ The Jupyter notebooks, which can be identified by the `.ipynb` extension at the 
 
 Competitions are listed in reverse chronological order (based on start date).
 
+- ["Diabetes Prediction Challenge"](competitions/playground-series-s5e12/)
+    - final [ROC AUC scores](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html) & rankings
+        - [private](https://www.kaggle.com/competitions/playground-series-s5e12/leaderboard): **0.69612** (1099 / 4208)
+        - [public](https://www.kaggle.com/competitions/playground-series-s5e12/leaderboard?tab=public): 0.69879 (1126 / 4208)
+    - My second try at ensembling! I initially played around with different models to establish some baselines before moving to build an ensemble of base models using the [two classes I implemented before](https://github.com/chuo-v/machine-learning-utils/blob/68997ef1778570d7361aa38efb912dbe14de59c3/ensemble-learning/stacking/stacking_predictions_retriever.py).
+    - Heeding the lessons learned from my previous competition (see below):
+        - I was more attentive in applying regularization and proactively removing base models from the ensemble that were redundant and mainly contributed noise.
+            - From a high of 59 base models in my ensemble, I whittled the number of base models down to 31 by the end of the competition by removing the base models that got low feature importances consistently from the meta-models trained through numerous iterations.
+        - I added a more diverse mix of base models (CatBoostClassifiers, LGBMClassifiers, XGBClassifiers) using a few different feature sets and various hyperparameter combinations (tuned via a lot of Optuna studies) picked to further promote diversity in the base model predictions.
+    - In the second half of the competition, I was able to continue climbing the public leaderboard by supplementing a sizable amount of feature generation, and due largely to the strong brakes (high regularization) I applied to the meta-model, it seems I was able to avoid overfitting this competition! My main takeaway from this competition is that I should explore using even more generated features to provide my models with the signal that they otherwise have difficulty latching on to.
 - ["Predicting the Beats-per-Minute of Songs"](competitions/playground-series-s5e9/)
-    - still working on this ongoing competition..
+    - final [RMSE scores](https://en.wikipedia.org/wiki/Root_mean_square_deviation) & rankings
+        - [private](https://www.kaggle.com/competitions/playground-series-s5e9/leaderboard): **26.40941** (1395 / 2583)
+        - [public](https://www.kaggle.com/competitions/playground-series-s5e9/leaderboard?tab=public): 26.38670 (655 / 2583)
+    - This was my first try at ensembling! I implemented two classes (which can be found [here](https://github.com/chuo-v/machine-learning-utils/blob/68997ef1778570d7361aa38efb912dbe14de59c3/ensemble-learning/stacking/stacking_predictions_retriever.py) as well) to streamline the process of retrieving and reusing my base model predictions.
+    - I got a bit overzealous and in the spirit of experimentation, ended up amassing 85 base models (mostly XGBRegressors). To help my meta-model (also an XGBRegressor) wade through all the noise and latch on to signal, I tried pruning base models using Optuna studies where whether a base model was included in a particular study was [suggested](https://optuna.readthedocs.io/en/stable/reference/generated/optuna.trial.Trial.html#optuna.trial.Trial.suggest_categorical) by Optuna, which in retrospect I did not handle very efficiently.
+    - Unfortunately, I ended up overfitting quite a bit to the public leaderboard. My main takeaway from this competition is that even with ensembling, one needs to be more careful with applying regularization to avoid overfitting.
 - ["Binary Classification with a Bank Dataset"](competitions/playground-series-s5e8/)
     - final [ROC AUC scores](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html) & rankings
         - [private](https://www.kaggle.com/competitions/playground-series-s5e8/leaderboard): **0.96609** (1900 / 3367)
