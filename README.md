@@ -14,7 +14,7 @@ The Jupyter notebooks, which can be identified by the `.ipynb` extension at the 
 
 Competitions are listed in reverse chronological order (based on start date).
 
-- ["Predicting Student Test Scores"](competitions/playground-series-s6e1/)
+- ["Predicting Student Test Scores" (S6E1)](competitions/playground-series-s6e1/)
     - final [RMSE scores](https://en.wikipedia.org/wiki/Root_mean_square_deviation) (& rankings)
         - [private](https://www.kaggle.com/competitions/playground-series-s6e1/leaderboard): **8.68886 (858 / 4319)**
         - [public](https://www.kaggle.com/competitions/playground-series-s6e1/leaderboard?tab=public): 8.65720 (857 / 4319)
@@ -25,7 +25,7 @@ Competitions are listed in reverse chronological order (based on start date).
         - fix premature clipping of predictions retrieved for base models to keep predictions between 0 and 100
             - the clipping was changed to only be done *after* averaging the predictions over the number of random seeds and the number of CV folds
             - unfortunately, I wasn't able to find time to apply this fix to the LGBMRegressor base models in my final ensemble
-- ["Diabetes Prediction Challenge"](competitions/playground-series-s5e12/)
+- ["Diabetes Prediction Challenge" (S5E12)](competitions/playground-series-s5e12/)
     - final [ROC AUC scores](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html) (& rankings)
         - [private](https://www.kaggle.com/competitions/playground-series-s5e12/leaderboard): **0.69612 (1099 / 4208)**
         - [public](https://www.kaggle.com/competitions/playground-series-s5e12/leaderboard?tab=public): 0.69879 (1126 / 4208)
@@ -35,21 +35,21 @@ Competitions are listed in reverse chronological order (based on start date).
             - From a high of 59 base models in my ensemble, I whittled the number of base models down to 31 by the end of the competition by removing the base models that got low feature importances consistently from the meta-models trained through numerous iterations.
         - I added a more diverse mix of base models (CatBoostClassifiers, LGBMClassifiers, XGBClassifiers) using a few different feature sets and various hyperparameter combinations (tuned via a lot of Optuna studies) picked to further promote diversity in the base model predictions.
     - In the second half of the competition, I was able to continue climbing the public leaderboard by supplementing a sizable amount of feature generation, and due largely to the strong brakes (high regularization) I applied to the meta-model, it seems I was able to avoid overfitting this competition! My main takeaway from this competition is that I should explore using even more generated features to provide my models with the signal that they otherwise have difficulty latching on to.
-- ["Predicting the Beats-per-Minute of Songs"](competitions/playground-series-s5e9/)
+- ["Predicting the Beats-per-Minute of Songs" (S5E9)](competitions/playground-series-s5e9/)
     - final [RMSE scores](https://en.wikipedia.org/wiki/Root_mean_square_deviation) (& rankings)
         - [private](https://www.kaggle.com/competitions/playground-series-s5e9/leaderboard): **26.40941 (1395 / 2583)**
         - [public](https://www.kaggle.com/competitions/playground-series-s5e9/leaderboard?tab=public): 26.38670 (655 / 2583)
     - This was my first try at ensembling! I implemented two classes (which can be found [here](https://github.com/chuo-v/machine-learning-utils/blob/68997ef1778570d7361aa38efb912dbe14de59c3/ensemble-learning/stacking/stacking_predictions_retriever.py) as well) to streamline the process of retrieving and reusing my base model predictions.
     - I got a bit overzealous and in the spirit of experimentation, ended up amassing 85 base models (mostly XGBRegressors). To help my meta-model (also an XGBRegressor) wade through all the noise and latch on to signal, I tried pruning base models using Optuna studies where whether a base model was included in a particular study was [suggested](https://optuna.readthedocs.io/en/stable/reference/generated/optuna.trial.Trial.html#optuna.trial.Trial.suggest_categorical) by Optuna, which in retrospect I did not handle very efficiently.
     - Unfortunately, I ended up overfitting quite a bit to the public leaderboard. My main takeaway from this competition is that even with ensembling, one needs to be more careful with applying regularization to avoid overfitting.
-- ["Binary Classification with a Bank Dataset"](competitions/playground-series-s5e8/)
+- ["Binary Classification with a Bank Dataset" (S5E8)](competitions/playground-series-s5e8/)
     - final [ROC AUC scores](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html) (& rankings)
         - [private](https://www.kaggle.com/competitions/playground-series-s5e8/leaderboard): **0.96609 (1900 / 3367)**
         - [public](https://www.kaggle.com/competitions/playground-series-s5e8/leaderboard?tab=public): 0.96599 (1986 / 3367)
     - This was my second competition. Following the previous competition, I initially used traditional machine learning techniques for predictions, but towards the last few days of the competition, improvements in scores were harder to come by, so I decided to try my hand at my first neural network. I had to allocate some time for learning the new concepts, so I only designed a simple network, but it did allow me to gain a ~0.2% increase in both public/private scores.
     - Unlike my previous competition, it seemed I did _not_ have a problem with overfitting to the public leaderboard for this competition.
     - Of the solutions shared by top-ranking teams, it seems that (a lot of) _ensembling_ was a common theme, so this approach is something I would like to explore sometime.
-- ["Predict the Introverts from the Extroverts"](competitions/playground-series-s5e7/)
+- ["Predict the Introverts from the Extroverts" (S5E7)](competitions/playground-series-s5e7/)
     - final [accuracy scores](https://www.kaggle.com/code/metric/accuracy-score) (& rankings)
         - [private](https://www.kaggle.com/competitions/playground-series-s5e7/leaderboard): **0.96842 (2281 / 4331)**
         - [public](https://www.kaggle.com/competitions/playground-series-s5e7/leaderboard?tab=public): 0.97489 (1917 / 4331)
