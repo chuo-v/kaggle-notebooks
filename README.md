@@ -14,6 +14,17 @@ The Jupyter notebooks, which can be identified by the `.ipynb` extension at the 
 
 Competitions are listed in reverse chronological order (based on start date).
 
+- ["Predicting Student Test Scores"](competitions/playground-series-s6e1/)
+    - final [RMSE scores](https://en.wikipedia.org/wiki/Root_mean_square_deviation) (& rankings)
+        - [private](https://www.kaggle.com/competitions/playground-series-s6e1/leaderboard): **8.68886 (858 / 4319)**
+        - [public](https://www.kaggle.com/competitions/playground-series-s6e1/leaderboard?tab=public): 8.65720 (857 / 4319)
+    - For this competition, I used a final ensemble of 18 base models, and instead of the tree-based meta models which I had used in previous competitions, I ended up selecting BayesianRidge for combining my base model predictions (which performed better than tree-based models that tried finding more-complex rules which end up learning the noise in the validation fold).
+    - Some of the techniques used during this competition that helped etch out further improvements in my RMSE scores:
+        - apply log transformation on the target (to squash the tail)
+        - add generated features for (1) clusters of student profiles, (2) distances to each cluster, and (3) distance to nearest cluster
+        - fix premature clipping of predictions retrieved for base models to keep predictions between 0 and 100
+            - the clipping was changed to only be done *after* averaging the predictions over the number of random seeds and the number of CV folds
+            - unfortunately, I wasn't able to find time to apply this fix to the LGBMRegressor base models in my final ensemble
 - ["Diabetes Prediction Challenge"](competitions/playground-series-s5e12/)
     - final [ROC AUC scores](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html) (& rankings)
         - [private](https://www.kaggle.com/competitions/playground-series-s5e12/leaderboard): **0.69612 (1099 / 4208)**
